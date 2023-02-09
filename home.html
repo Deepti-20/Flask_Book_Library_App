@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Management App</title>
+</head>
+<body>
+    <!-- home.html -->
+    <h1>Book Management App</h1>
+    <a href="{{ url_for('add') }}">Add Book</a>
+    <table>
+      <thead>
+        <tr>
+          <th>Book</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for index, book in enumerate(books) %}
+        <tr>
+          <td>{{ book }}</td>
+          <td>
+            <a href="{{ url_for('edit', index=index) }}">Edit</a>
+            <a href="{{ url_for('delete', index=index) }}">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <!-- add.html -->
+    <h1>Add Book</h1>
+    <form action="{{ url_for('add') }}" method="post">
+      <input type="text" name="book" required>
+      <input type="submit" value="Add">
+    </form>
+
+    <!-- edit.html -->
+    <h1>Edit Book</h1>
+    <form action="{{ url_for('edit', index=index) }}" method="post">
+      <input type="text" name="book" value="{{ book }}" required>
+      <input type="submit" value="Save">
+    </form>
+</body>
+</html>
